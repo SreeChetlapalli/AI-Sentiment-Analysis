@@ -1,59 +1,80 @@
-# Emotion Analysis CLI Tool 📊
+# AI Sentiment Analysis Tool
 
 This is a command-line tool built with TypeScript that uses the Hugging Face Inference API to analyze the emotional sentiment of user-provided text. It then generates a bar chart visualizing the emotional breakdown.
 
----
+## What it does
 
-## Prerequisites
+This tool takes any text you give it and breaks down the emotional content across seven categories: anger, disgust, fear, joy, neutral, sadness, and surprise. It uses a pre-trained AI model from Hugging Face to analyze the sentiment and generates a nice bar chart showing the results.
 
 Before you begin, ensure you have the following installed on your system:
 * [Node.js](https://nodejs.org/) (which includes npm)
 
----
+## Getting started
 
-## Installation
+### What you'll need
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <your-repository-url>
-    cd <your-project-directory>
-    ```
+- Node.js installed on your computer
+- A free Hugging Face account and API key
 
-2.  **Install dependencies:**
-    This project uses several npm packages which are listed in the `package.json` file. Install them by running:
-    ```bash
-    npm install
-    ```
+### Setup
 
-3.  **Set up environment variables:**
-    Create a file named `.env` in the root of the project and add your Hugging Face API key:
-    ```
-    HUGGINGFACE_API_KEY="hf_YourApiKeyHere"
-    ```
+1. **Get the code:**
+   ```bash
+   git clone <your-repository-url>
+   cd ai-sentiment-analysis
+   ```
 
----
+2. **Install the required packages:**
+   ```bash
+   npm install
+   ```
 
-## Usage
+3. **Get your Hugging Face API key:**
+   - Go to [huggingface.co](https://huggingface.co) and create a free account
+   - Go to your profile settings and create a new API token
+   - Create a `.env` file in the project folder and add:
+     ```
+     HUGGINGFACE_API_KEY=your_actual_api_key_here
+     ```
 
-1.  **Compile TypeScript:**
-    ```bash
-    npx tsc
-    ```
+### Running the tool
 
-2.  **Run the application:**
-    ```bash
-    node dist/index.js
-    ```
-    The program will then prompt you to enter text for analysis.
+1. **Compile the TypeScript code:**
+   ```bash
+   npx tsc
+   ```
 
----
+2. **Start the analysis:**
+   ```bash
+   node dist/index.js
+   ```
 
-## Key Dependencies
+3. **Type some text when prompted!** The tool will analyze each sentence and show you the emotional breakdown with colored output. It'll also generate a chart URL you can open in your browser.
 
-This project relies on the following packages:
+Type `exit` when you're done.
 
-* `@huggingface/inference`: To connect to the Hugging Face API.
-* `chalk`: For styling the console output with colors.
-* `dotenv`: For managing environment variables (like your API key).
-* `prompt-sync`: To receive user input in the command line.
-* `quickchart-js`: To generate the chart images.
+## How it works
+
+The tool uses the `j-hartmann/emotion-english-distilroberta-base` model from Hugging Face, which is specifically trained to detect emotions in English text. It processes your input sentence by sentence and gives each one a confidence score for different emotions.
+
+The results are displayed with color-coded output in your terminal, and you get a shareable chart showing the emotional breakdown visually.
+
+## Built with
+
+- **TypeScript** - For type safety and better development experience
+- **Hugging Face Inference API** - For the AI emotion analysis
+- **Chalk** - For pretty colored terminal output
+- **QuickChart** - For generating the visualization charts
+- **Express** - For potential web interface (server.ts)
+
+## Example output
+
+When you run the tool and enter text like "I'm so excited about this new project!", you'll see something like:
+
+```
+Analyzing: "I'm so excited about this new project!"
+ -> Label: joy, Score: 85.23%
+ -> Label: surprise, Score: 12.45%
+ -> Label: neutral, Score: 2.32%
+```
+
